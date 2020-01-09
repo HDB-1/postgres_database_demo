@@ -34,6 +34,18 @@ app.get('/people', (req, res) => {
     })
 })
 
+app.get('/address', (req, res) => {
+    knex.select('*')
+    .from('address')
+    .on('query', function (data){
+
+    })
+    .then((response) => {
+        console.log(response)
+        res.send(response)
+    })
+})
+
 
 
 
