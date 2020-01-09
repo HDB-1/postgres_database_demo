@@ -17,8 +17,7 @@ app.use(express.static('views'));
 app.use(express.urlencoded());
 
 app.get('/', (req, res) => {
-    res.send("Hello World!")
-    // console.log()
+    
 })
   
 
@@ -79,6 +78,13 @@ app.get('/peoplesearch', (req, res) => {
     })
 })
 
+let me = {name: 'Harry', age: 100, occupants: 3}
+app.post('/addme', (req, res) => {
+    knex('people')
+    .insert(me)
+    .then(console.log('yay'))
+    res.redirect('/')
+})
 
 
 
