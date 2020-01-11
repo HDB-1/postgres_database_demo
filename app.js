@@ -60,7 +60,20 @@ app.get('/addresssearch', (req, res) => {
     })
 })
 
-
+app.get('/homes', (req, res) => {
+    knex.select('*')
+    .from('homes')
+    .where(req.query)
+    .on('query-response', () => {})
+    .then(function(result) {
+        res.send(result);
+        console.log(result);
+    })
+    .catch(function (error) {
+        console.log(error)
+        res.send(error.hint)
+    })
+})
 
 
 app.get('/peoplesearch', (req, res) => {
