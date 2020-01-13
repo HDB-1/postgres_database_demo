@@ -91,6 +91,22 @@ app.get('/peoplesearch', (req, res) => {
     })
 })
 
+app.get('/peopleAndAddress', (req, res) => {
+    knex.select('*')
+    .from('people')
+    .leftJoin('address','people.id', 'address.id')
+    .where(req.query)
+    .on('query-response', () => {})
+    .then(function(result) {
+        res.send(result)
+        console.log(result);
+    })
+    .catch(function (error) {
+        console.log(error)
+        res.send(error.hint)
+    })
+})
+
 let me = {name: 'Harry', age: 100, occupants: 3}
 app.post('/addme', (req, res) => {
     knex('people')
