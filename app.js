@@ -1,9 +1,10 @@
 const express = require('express')
 const app = express()
 const port = 7070
+const setupFile = require('./knexfile')
 
 var knex = require('knex')({
-    client: 'pg',
+    client: setupFile.development.client,       //setup connection differently
     connection: {
       host: 'localhost',
       user: 'postgres',
