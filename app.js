@@ -103,6 +103,22 @@ app.get('/peopleAndAddress', (req, res) => {
     })
 })
 
+app.get('/namesAndPostcodes', (req, res) => {
+    knex.select('people.name', 'address.postcode')
+    .from('people')
+    .innerJoin('address', 'people.id', 'address.id')
+    .where(req.query)
+    .on('query-response', () => {})
+    .then(function(result) {
+        res.send(result)
+        console.log(result);
+    })
+    .catch(function(error) {
+        res.send(error.hint)
+        console.log(error);
+    })
+})
+
 let me = {name: 'Harry', age: 100, occupants: 3}
 app.post('/addme', (req, res) => {
     knex('people')
